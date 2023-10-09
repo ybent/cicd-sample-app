@@ -1,9 +1,24 @@
 #!/bin/bash
 set -euo pipefail
 
-mkdir tempdir
-mkdir tempdir/templates
-mkdir tempdir/static
+# Define the directories to be created
+directories=("tempdir" "tempdir/templates" "tempdir/static")
+
+# Loop through the directories
+for dir in "${directories[@]}"; do
+  # Check if the directory exists
+  if [ -d "$dir" ]; then
+    echo "Directory '$dir' already exists. Skipping..."
+  else
+    # Create the directory if it doesn't exist
+    mkdir -p "$dir"
+    echo "Created directory '$dir'"
+  fi
+done
+
+
+
+
 
 cp sample_app.py tempdir/.
 cp -r templates/* tempdir/templates/.
